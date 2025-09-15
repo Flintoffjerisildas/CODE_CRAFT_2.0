@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix backend\" \"npm start --prefix frontend\"",
     "server": "npm run dev --prefix backend",
-    "client": "npm start --prefix frontend"
+    "client": "npm start --prefix frontend",
+    "deploy": "git push -u origin main"
   },
   "dependencies": {
     "concurrently": "^9.0.0"
