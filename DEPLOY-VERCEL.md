@@ -5,10 +5,12 @@
 ### **Step 1: Deploy Frontend to Vercel (2 minutes)**
 
 1. **Go to Vercel**
+
    - Visit: https://vercel.com
    - Click **"Sign in with GitHub"**
 
 2. **Create New Project**
+
    - Click **"Add New Project"**
    - Select: **`Flintoffjerisildas/CODE_CRAFT_2.0`**
    - **Framework:** Create React App
@@ -25,10 +27,12 @@
 ### **Step 2: Deploy Backend to Railway (3 minutes)**
 
 1. **Go to Railway**
+
    - Visit: https://railway.app
    - Sign in with GitHub
 
 2. **Create New Project**
+
    - **"New Project"** → **"Deploy from GitHub"**
    - Select your repository
    - **Root Directory:** `backend`
@@ -36,6 +40,7 @@
    - **Start Command:** `node server.js`
 
 3. **Add Environment Variables:**
+
    ```
    NODE_ENV=production
    PORT=5000
@@ -57,6 +62,7 @@
 ### **Step 3: Connect Frontend & Backend (1 minute)**
 
 1. **In Vercel Dashboard:**
+
    - Go to your project settings
    - **Environment Variables** tab
    - Add: `REACT_APP_API_URL` = `https://your-backend.up.railway.app`
@@ -71,18 +77,21 @@
 ## ✅ **You'll Get:**
 
 ### **Frontend (Vercel):**
+
 - ⚡ **Ultra-fast loading** (global CDN)
 - 📱 **Perfect mobile performance**
 - 🔐 **Automatic HTTPS**
 - 🌍 **Global edge locations**
 
-### **Backend (Railway):**  
+### **Backend (Railway):**
+
 - 🖥️ **Powerful API server**
 - 📊 **MongoDB Atlas database**
 - 🎥 **Cloudinary video streaming**
 - 🔒 **Production security**
 
 ### **Total Cost:**
+
 - **Vercel:** $0 (FREE)
 - **Railway:** $0-5 (FREE $5 credit monthly)
 - **MongoDB:** $0 (FREE tier)
@@ -92,6 +101,7 @@
 ---
 
 ## 🎉 **Your Live URLs:**
+
 - **Frontend:** `https://your-app-name.vercel.app`
 - **Backend API:** `https://your-backend.up.railway.app`
 
