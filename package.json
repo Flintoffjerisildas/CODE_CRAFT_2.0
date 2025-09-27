@@ -4,11 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix backend\" \"npm start --prefix frontend\"",
-    "server": "npm run dev --prefix backend",
+    "server": "npm run dev --prefix backend", 
     "client": "npm start --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "start": "cd backend && node server.js",
+    "build:frontend": "cd frontend && npm run build",
+    "deploy:frontend": "cd frontend && npm run build && vercel --prod",
+    "deploy:backend": "cd backend && git push railway main",
+    "production:test": "cd backend && npm run load-test-heavy",
     "deploy": "git push -u origin main"
   },
   "dependencies": {
     "concurrently": "^9.0.0"
+  },
+  "devDependencies": {
+    "autocannon": "^8.0.0"
   }
 }

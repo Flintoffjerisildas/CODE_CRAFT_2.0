@@ -13,5 +13,4 @@ const scenarioSchema = new mongoose.Schema({
     },
   ],
 });
-
-module.exports = mongoose.model("Scenario", scenarioSchema);
+// Scenario model removed. No longer used in the project.

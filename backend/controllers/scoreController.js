@@ -1,21 +1,35 @@
+// Global leaderboard (top scores across all drills)
+const getGlobalLeaderboard = async (req, res) => {
+  try {
+    const leaderboard = await Score.find()
+      .populate("user", "name")
+      .sort({ points: -1 })
+      .limit(10);
+    res.json(leaderboard);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch global leaderboard" });
+  }
+};
 const Score = require("../models/Score");
 
 // Save Score
 const saveScore = async (req, res) => {
-  try { console.log("Incoming Score:", req.body);  // Debug log
-    const { scenario, points } = req.body;
+  try {
+    console.log("Incoming Score:", req.body); // Debug log
+    const { videoDrill, disasterType, points } = req.body;
 
-    if (!scenario || points === undefined) {
-      return res.status(400).json({ error: "scenario and points required" });
+    if (videoDrill && points !== undefined) {
+      const score = new Score({
+        user: req.user._id,
+        videoDrill,
+        disasterType: disasterType || undefined,
+        points,
+      });
+      await score.save();
+      return res.json(score);
+    } else {
+      return res.status(400).json({ error: "videoDrill and points required" });
     }
-
-    const score = new Score({
-      user: req.user._id,
-      scenario,
-      points,
-    });
-    await score.save();
-    res.json(score);
   } catch (err) {
     res.status(500).json({ error: "Failed to save score" });
   }
@@ -24,7 +38,7 @@ const saveScore = async (req, res) => {
 // Get my scores
 const getMyScores = async (req, res) => {
   try {
-    const scores = await Score.find({ user: req.user._id }).populate("scenario", "title");
+    const scores = await Score.find({ user: req.user._id }).populate("videoDrill", "title");
     res.json(scores);
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch my scores" });
@@ -36,7 +50,7 @@ const getAllScores = async (req, res) => {
   try {
     const scores = await Score.find()
       .populate("user", "name email")
-      .populate("scenario", "title");
+      .populate("videoDrill", "title");
     res.json(scores);
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch all scores" });
@@ -46,8 +60,8 @@ const getAllScores = async (req, res) => {
 // Leaderboard
 const getLeaderboard = async (req, res) => {
   try {
-    const { scenario } = req.params;
-    const leaderboard = await Score.find({ scenario })
+    const { videoDrill } = req.params;
+    const leaderboard = await Score.find({ videoDrill })
       .populate("user", "name")
       .sort({ points: -1 })
       .limit(10);
@@ -62,4 +76,5 @@ module.exports = {
   getMyScores,
   getAllScores,
   getLeaderboard,
+  getGlobalLeaderboard,
 };
